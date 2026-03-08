@@ -219,22 +219,120 @@ Demonstrar domínio de engenharia de dados com foco em:
 
 ---
 
-## Fluxo do Pipeline
+</br>
+</br></br></br>
 
-Cada execução segue **8 etapas sequenciais**:
+---
+<h2 align="center">Fluxo do Pipeline</h2>
 
-```
-┌──────────────────────────────────────────────────────────────────────────┐
-│  Etapa 1 │ StartBatch       │ Abre registro no ops.BatchControl         │
-│  Etapa 2 │ ReadFile         │ Lê CSV ou Parquet → List<TripRecord>      │
-│  Etapa 3 │ InsertLanding    │ SqlBulkCopy → landing.YellowTripRaw       │
-│  Etapa 4 │ CleanData        │ TRY_CAST + hash → staging.YellowTripClean │
-│  Etapa 5 │ RejectInvalid    │ 11 regras → staging.YellowTripRejected    │
-│  Etapa 6 │ Deduplicate      │ SHA2_256 → marca is_duplicate = 1         │
-│  Etapa 7 │ LoadCore         │ Insere únicos válidos → core.Trip          │
-│  Etapa 8 │ FinishBatch      │ Atualiza métricas e status do batch       │
-└──────────────────────────────────────────────────────────────────────────┘
-```
+<p align="center">
+Cada execução do pipeline segue <b>8 etapas sequenciais</b>
+</p>
+
+<table align="center">
+<tr>
+<td align="center" width="720">
+
+<b>Etapa 1 — StartBatch</b><br>
+<sub>Abre registro de execução em <code>ops.BatchControl</code></sub>
+
+</td>
+</tr>
+</table>
+
+<p align="center">⬇</p>
+
+<table align="center">
+<tr>
+<td align="center" width="720">
+
+<b>Etapa 2 — ReadFile</b><br>
+<sub>Lê arquivo CSV ou Parquet → <code>List&lt;TripRecord&gt;</code></sub>
+
+</td>
+</tr>
+</table>
+
+<p align="center">⬇</p>
+
+<table align="center">
+<tr>
+<td align="center" width="720">
+
+<b>Etapa 3 — InsertLanding</b><br>
+<sub><code>SqlBulkCopy</code> → <code>landing.YellowTripRaw</code></sub>
+
+</td>
+</tr>
+</table>
+
+<p align="center">⬇</p>
+
+<table align="center">
+<tr>
+<td align="center" width="720">
+
+<b>Etapa 4 — CleanData</b><br>
+<sub>Conversão de tipos com <code>TRY_CAST</code></sub><br>
+<sub>Geração de hash → <code>staging.YellowTripClean</code></sub>
+
+</td>
+</tr>
+</table>
+
+<p align="center">⬇</p>
+
+<table align="center">
+<tr>
+<td align="center" width="720">
+
+<b>Etapa 5 — RejectInvalid</b><br>
+<sub>Aplicação de 11 regras de validação</sub><br>
+<sub>Registros inválidos → <code>staging.YellowTripRejected</code></sub>
+
+</td>
+</tr>
+</table>
+
+<p align="center">⬇</p>
+
+<table align="center">
+<tr>
+<td align="center" width="720">
+
+<b>Etapa 6 — Deduplicate</b><br>
+<sub>Hash <code>SHA2_256</code> para detecção de duplicados</sub><br>
+<sub>Marca <code>is_duplicate = 1</code></sub>
+
+</td>
+</tr>
+</table>
+
+<p align="center">⬇</p>
+
+<table align="center">
+<tr>
+<td align="center" width="720">
+
+<b>Etapa 7 — LoadCore</b><br>
+<sub>Insere registros válidos e únicos em <code>core.Trip</code></sub>
+
+</td>
+</tr>
+</table>
+
+<p align="center">⬇</p>
+
+<table align="center">
+<tr>
+<td align="center" width="720">
+
+<b>Etapa 8 — FinishBatch</b><br>
+<sub>Atualiza métricas e status da execução no batch</sub>
+
+</td>
+</tr>
+</table>
 
 </br>
 </br>
