@@ -1,0 +1,53 @@
+# .gitignore for TaxiPipeline project
+
+## .NET
+bin/
+obj/
+*.user
+*.suo
+*.sln.docstates
+.vs/
+*.vsidx
+
+## Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Bb]uild/
+bld/
+
+## NuGet
+*.nupkg
+**/[Pp]ackages/*
+!**/[Pp]ackages/build/
+*.nuget.props
+*.nuget.targets
+project.lock.json
+
+## IDE
+.idea/
+*.swp
+*.swo
+*~
+
+## OS
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store
+
+## Data archive (keep structure, ignore archived files)
+data/archive/*
+!data/archive/.gitkeep
+
+## User-specific configs (connection strings, secrets)
+appsettings.Development.json
+appsettings.Local.json
+**/appsettings.Development.json
+**/appsettings.Local.json
+
+## Downloaded data files
+data/input/*.parquet
+data/input/*.csv
+data/input/*.downloading

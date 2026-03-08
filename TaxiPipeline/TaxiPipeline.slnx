@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/TaxiPipeline.Application/TaxiPipeline.Application.csproj" />
+    <Project Path="src/TaxiPipeline.Console/TaxiPipeline.Console.csproj" />
+    <Project Path="src/TaxiPipeline.Domain/TaxiPipeline.Domain.csproj" />
+    <Project Path="src/TaxiPipeline.Infrastructure/TaxiPipeline.Infrastructure.csproj" />
+  </Folder>
+</Solution>
